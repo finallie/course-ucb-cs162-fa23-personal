@@ -170,7 +170,7 @@ int main(int argc, char* argv[]) {
     total_words = len_words(word_counts);
     printf("The total number of words is: %i\n", total_words);
   } else {
-    wordcount_sort(&word_counts, wordcount_less);
+    // wordcount_sort(&word_counts, wordcount_less);
 
     printf("The frequencies of each word are: \n");
     fprint_words(word_counts, stdout);

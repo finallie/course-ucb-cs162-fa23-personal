@@ -77,6 +77,13 @@ WordCount* find_word(WordCount* wchead, char* word) {
   return wc;
 }
 
+static bool wordcount_less(const WordCount* wc1, const WordCount* wc2) {
+  if (wc1->count == wc2->count) {
+    return strcmp(wc1->word, wc2->word) < 0;
+  }
+  return wc1->count < wc2->count;
+}
+
 int add_word(WordCount** wclist, char* word) {
   /* If word is present in word_counts list, increment the count.
      Otherwise insert with count 1.
@@ -92,8 +99,9 @@ int add_word(WordCount** wclist, char* word) {
     }
     wc->word = new_string(word);
     wc->count = 1;
-    wc->next = *wclist;
-    *wclist = wc;
+    wc->next = NULL;
+    // *wclist = wc;
+    wordcount_insert_ordered(wclist, wc, wordcount_less);
   }
   return 0;
 }
